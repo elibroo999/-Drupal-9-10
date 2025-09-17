@@ -5,6 +5,6 @@ name: 'Проект'
 type: project
 description: 'Материал для хранения проектов'
 help: ''
-new_resision: false
+new_revision: false
 preview_mode: 1
 display_submitted: true

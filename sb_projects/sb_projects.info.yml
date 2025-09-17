@@ -1,7 +1,6 @@
 name: 'SB Projects'
 type: module
 description: 'Тип контента Проект + блок последних 3 проектов'
-core_version_reequirement: ^9 || ^10
-package: Custom
-dependencies:
-- node
+core_version_requirement: ^9 || ^10
+package: 'Custom'
+
