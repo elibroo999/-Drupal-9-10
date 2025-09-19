@@ -3,7 +3,7 @@
 namespace Drupal\sb_projects\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\node\Entity\Node;
+
 
 /**
  * @Block(
@@ -15,6 +15,7 @@ class LatestProjectsBlock extends BlockBase {
 
   public function build() {
     $nids = \Drupal::entityQuery('node')
+      ->accessCheck(TRUE)
       ->condition('type', 'project')
       ->condition('status', 1)
       ->sort('created', 'DESC')
@@ -22,8 +23,8 @@ class LatestProjectsBlock extends BlockBase {
       ->execute();
 
     $items = [];
-    if (!empty($nids)) {
-      $nodes = Node::loadMultiple($nids);
+    if ($nids) {
+      $nodes = \Drupal::entityTypeManager()->getStorage('node')->LoadMultiple($nids);
       foreach ($nodes as $node) {
         $items[] = $node->toLink()->toRenderable();
       }
@@ -33,8 +34,7 @@ class LatestProjectsBlock extends BlockBase {
       '#theme' => 'item_list',
       '#title' => $this->t('Последние проекты'),
       '#items' => $items,
-      '#cache' => ['max-age' => 0],
+      '#cache' => ['tags' => ['node_list']],
     ];
   }
-
 }

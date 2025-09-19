@@ -1,0 +1,8 @@
+sb_projects.api_projects:
+  path: '/api/projects'
+  defaults:
+    _controller: '\Drupal\sb_projects\Controller\ProjectsApiController::list'
+    _format: 'json'
+  requirements:
+    _permission: 'access content'
+  methods: [GET]
